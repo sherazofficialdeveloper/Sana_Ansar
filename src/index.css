@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-brand-dark: #5a001e;
+  --color-brand-accent: #DE1A58;
+  --color-brand-pink: #FF3E9B;
+  --color-brand-yellow: #f3c742;
+  --color-brand-bg: #F4EFE6;
+  --color-brand-bg-dark: #1a0b14;
+}
+
+@layer base {
+  html, body {
+    @apply overflow-x-hidden max-w-full;
+  }
+
+  body {
+    @apply font-sans antialiased transition-colors duration-300 bg-brand-bg dark:bg-brand-bg-dark;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  .serif-italic {
+    @apply font-serif italic font-bold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .dark .glass {
+    @apply bg-black/20 backdrop-blur-md border border-white/10;
+  }
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald", sans-serif;
+  
+  --color-brand-bg: #fefae7;
+  --color-brand-bg-dark: #1a1a1a;
+  --color-brand-dark: #3b001b;
+  --color-brand-accent: #f15533;
+  --color-brand-yellow: #ffe878;
+  --color-brand-pink: #f6c2f4;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-dark font-sans antialiased;
+  }
+}
+
+.serif-italic {
+  font-style: italic;
+  font-family: serif;
+}
+
+.arty-input {
+  @apply w-full bg-transparent border-b-2 border-brand-dark/10 py-3 focus:border-brand-dark outline-none transition-all text-lg font-medium placeholder:text-brand-dark/20;
+}
+
+.arty-label {
+  @apply text-xl font-display font-bold uppercase tracking-tight;
+}
+
+.arty-button {
+  @apply relative px-10 py-4 bg-brand-yellow text-brand-dark font-display font-bold text-xl rounded-full border-b-[8px] border-brand-dark active:border-b-0 active:translate-y-[8px] transition-all;
+}
+
+.arty-card {
+  @apply bg-brand-bg border-2 border-brand-dark/5 rounded-[64px] p-8 md:p-16;
+}
