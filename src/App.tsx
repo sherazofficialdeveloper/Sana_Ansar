@@ -13,6 +13,7 @@ import {
   Mail, Phone, MapPin, Instagram, Twitter, Linkedin,
   Compass, Palette, Code, Rocket, BarChart3, Star, Quote
 } from 'lucide-react';
+import ComparisonSection from './comparision';
 
 // --- Components ---
 
@@ -233,7 +234,7 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, backgroundColor: "#f3c742", color: "#5a001e", boxShadow: "0 10px 15px -3px rgba(243, 199, 66, 0.3)" }}
+            whileHover={{ scale: 1.05, backgroundColor: "#f3c742", color: "#e9e7e7", boxShadow: "0 10px 15px -3px rgba(243, 199, 66, 0.3)" }}
             whileTap={{ scale: 0.95 }}
             className={`px-6 py-2 border rounded-full text-xs font-bold transition-all uppercase tracking-widest ${scrolled || isDark ? 'border-white text-white' : 'border-brand-dark text-brand-dark'}`}
           >
@@ -931,75 +932,73 @@ const Portfolio = () => {
   const categories = ['All', 'Web Development', 'Social Management', 'Post Designs', 'Ads Campaigns', 'Logo Projects'];
   
   const projects = [
-  { 
-    id: 1, 
-    category: 'Web Development',  // ✅ Added missing category
-    title: 'Prints Empire',        // ✅ Added missing title
-    img: '/image.png',
-    liveLink: 'https://printsempire.com/', 
-  },
-  { 
-    id: 2,
-    category: 'Web Development',  // ✅ Added
-    title: 'MG Printings',         // ✅ Added
-    img: '/image1.png',
-    liveLink: 'https://mgprintings.com/', 
-  },
-  { 
-    id: 3,
-    category: 'Web Development',  // ✅ Added
-    title: 'Prints Empire 2',      // ✅ Added
-    img: '/image2.png',
-    liveLink: 'https://printsempire.com/', 
-  },
-  { 
-    id: 4,
-    category: 'Web Development',  // ✅ Added
-    title: 'Fiber & Internet',     // ✅ Added
-    img: '/image3.png',
-    liveLink: 'https://getfiberandinternetnow.com/', 
-  },
-  { 
-    id: 5,
-    category: 'Web Development',  // ✅ Added
-    title: 'Internet WiFi Service', // ✅ Added
-    img: '/image4.png',
-    liveLink: 'https://getinternetwifiservice.com/', 
-  },
-  { 
-    id: 6,
-    category: 'Web Development',  // ✅ Added
-    title: 'Cable Internet Services', // ✅ Added
-    img: '/image5.png',
-    liveLink: 'https://newcableinternetservices.com/', 
-  },
-  { 
-    id: 7,
-    category: 'Social Management', // ✅ Added
-    title: 'Bilal K. Instagram',    // ✅ Added
-    img: '/image6.png',
-    liveLink: 'https://www.instagram.com/bilal.k1989/', 
-  },
-  { 
-    id: 8,
-    category: 'Social Management', // ✅ Added
-    title: 'Tech Pirates',          // ✅ Added
-    img: '/image7.png',
-    liveLink: 'https://www.instagram.com/techpirates14/', 
-  },
-  { 
-    id: 9,
-    category: 'Social Management', // ✅ Added
-    title: 'Dwelio Listing',        // ✅ Added
-    img: '/image8.png',
-    liveLink: 'https://www.instagram.com/dweliolisting/',
-  },
-];
+    { 
+      id: 1, 
+      category: 'Web Development',
+      title: 'Prints Empire',
+      img: '/image.png',
+      liveLink: 'https://printsempire.com/', 
+    },
+    { 
+      id: 2,
+      category: 'Web Development',
+      title: 'MG Printings',
+      img: '/image1.png',
+      liveLink: 'https://mgprintings.com/', 
+    },
+    { 
+      id: 3,
+      category: 'Web Development',
+      title: 'Prints Empire 2',
+      img: '/image2.png',
+      liveLink: 'https://printsempire.com/', 
+    },
+    { 
+      id: 4,
+      category: 'Web Development',
+      title: 'Fiber & Internet',
+      img: '/image3.png',
+      liveLink: 'https://getfiberandinternetnow.com/', 
+    },
+    { 
+      id: 5,
+      category: 'Web Development',
+      title: 'Internet WiFi Service',
+      img: '/image4.png',
+      liveLink: 'https://getinternetwifiservice.com/', 
+    },
+    { 
+      id: 6,
+      category: 'Web Development',
+      title: 'Cable Internet Services',
+      img: '/image5.png',
+      liveLink: 'https://newcableinternetservices.com/', 
+    },
+    { 
+      id: 7,
+      category: 'Social Management',
+      title: 'Bilal K. Instagram',
+      img: '/image6.png',
+      liveLink: 'https://www.instagram.com/bilal.k1989/', 
+    },
+    { 
+      id: 8,
+      category: 'Social Management',
+      title: 'Tech Pirates',
+      img: '/image7.png',
+      liveLink: 'https://www.instagram.com/techpirates14/', 
+    },
+    { 
+      id: 9,
+      category: 'Social Management',
+      title: 'Dwelio Listing',
+      img: '/image8.png',
+      liveLink: 'https://www.instagram.com/dweliolisting/',
+    },
+  ];
 
-  // Filter function - category ke according filter karega
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
-  // Function to handle button click
   const handleLiveDemoClick = (e, link) => {
     e.preventDefault();
     e.stopPropagation();
@@ -1037,50 +1036,86 @@ const Portfolio = () => {
           layout
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-         <AnimatePresence mode='popLayout'>
-  {filteredProjects.map(project => (
-    <motion.div 
-      key={project.id}
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      whileHover={{ y: -10 }}
-      className="group relative aspect-[4/3] rounded-[40px] overflow-hidden border border-brand-dark/10 dark:border-white/10 shadow-sm transition-all duration-500"
-    >
-      <img 
-        src={project.img} 
-        alt={project.title} 
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale-[0.5] group-hover:grayscale-0"
-        referrerPolicy="no-referrer"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-10 text-center">
-        <span className="text-brand-yellow text-xs font-bold mb-3 uppercase tracking-[0.2em]">{project.category}</span>
-        <h3 className="text-white text-2xl font-display font-bold mb-6">{project.title}</h3>
-        
-        {/* Live Demo Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={(e) => handleLiveDemoClick(e, project.liveLink)}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-yellow text-brand-dark font-bold hover:bg-white transition-all duration-300 shadow-lg cursor-pointer"
-        >
-          <span>Live Demo</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-        </motion.button>
-      </div>
-    </motion.div>
-  ))}
-</AnimatePresence>
+          <AnimatePresence mode='popLayout'>
+            {filteredProjects.map(project => (
+              <motion.div 
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -10 }}
+                className="group relative rounded-2xl overflow-hidden bg-white dark:bg-white/5 shadow-lg hover:shadow-2xl transition-all duration-500"
+              >
+                {/* Image Container */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img 
+                    src={project.img} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  {/* Overlay with gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                  
+                  {/* "Look what we made!" Badge */}
+                  <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-[-10px] group-hover:translate-y-0">
+                    <span className="text-white text-xs font-medium bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full">
+                      Look what we made!
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-2">
+                    {project.title}
+                  </h3>
+                  
+                  {/* Category Tag */}
+                  <div className="mb-4">
+                    <span className="text-xs font-medium text-brand-pink dark:text-brand-yellow uppercase tracking-wider">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-brand-dark/60 dark:text-white/50 text-sm mb-6 line-clamp-2">
+                    Lose excess weight that's holding you back and reclaim your life.
+                  </p>
+
+                  {/* Button Group */}
+                  <div className="flex items-center gap-3">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => handleLiveDemoClick(e, project.liveLink)}
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-brand-dark dark:bg-white text-white dark:text-brand-dark font-semibold text-sm hover:bg-brand-pink dark:hover:bg-brand-yellow transition-all duration-300"
+                    >
+                      Start Assessment
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => handleLiveDemoClick(e, project.liveLink)}
+                      className="px-4 py-2.5 rounded-xl border border-brand-dark/20 dark:border-white/20 bg-transparent text-brand-dark dark:text-white font-semibold text-sm hover:border-brand-pink dark:hover:border-brand-yellow hover:text-brand-pink dark:hover:text-brand-yellow transition-all duration-300"
+                    >
+                      View Case Study
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
   );
 };
+
 const Footer = () => {
   return (
     <footer id="contact" className="bg-brand-dark dark:bg-black text-white pt-8 pb-10 px-6 relative overflow-hidden transition-colors duration-500">
@@ -1719,6 +1754,7 @@ export default function App() {
         <Skills />
         <Process />
         <Portfolio />
+        <ComparisonSection />
         <WhyFit />
         <ContactForm />
         <CallToAction />
